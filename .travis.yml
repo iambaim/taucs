@@ -1,0 +1,17 @@
+language: c
+
+matrix:
+  include:
+    - os: linux
+      addons:
+        apt:
+          packages:
+            - liblapack-dev
+            - libblas-dev
+            - libmetis-dev
+            - gfortran
+    - os: osx
+    - os: windows
+
+install:
+  - ./build.sh
