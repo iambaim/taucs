@@ -11,7 +11,11 @@ matrix:
             - libmetis-dev
             - gfortran
     - os: osx
+      addons:
+        homebrew:
+          packages:
+            - metis
     - os: windows
 
-install:
+script:
   - ./build.sh
