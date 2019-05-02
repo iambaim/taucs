@@ -1,0 +1,26 @@
+image:
+  - Visual Studio 2017
+
+platform:
+  - x64
+
+environment:
+  matrix:
+    - COMPILER: msys2
+      PLATFORM: x64
+      MSYS2_ARCH: x86_64
+      MSYS2_DIR: msys64
+      MSYSTEM: MINGW64
+      BIT: 64
+
+install:
+  - sh download.sh
+
+build_script:
+  - rmdir /s /Q C:\OpenSSL-Win32 C:\OpenSSL-Win64 
+  - '%APPVEYOR_BUILD_FOLDER%\build_win.bat'
+
+#  - C:\msys64\msys2_shell.cmd -mingw64 -defterm -here ls
+#  - C:\msys64\usr\bin\pacman --noconfirm --needed -S mingw-w64-x86_64-metis mingw-w64-x86_64-lapack mingw-w64-x86_64-openblas mingw-w64-x86_64-f2c
+#  - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/build_win.sh"
+#  - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/gather.sh"

@@ -1,6 +1,6 @@
-diff -aurN taucs-orig/CGAL-README.TXT taucs/CGAL-README.TXT
---- taucs-orig/CGAL-README.TXT	1970-01-01 01:00:00.000000000 +0100
-+++ taucs/CGAL-README.TXT	2012-06-10 21:03:55.640878000 +0200
+diff -aruN taucs-old/CGAL-README.TXT taucs-new/CGAL-README.TXT
+--- taucs-old/CGAL-README.TXT	1970-01-01 01:00:00.000000000 +0100
++++ taucs-new/CGAL-README.TXT	2019-05-04 18:39:27.000000000 +0200
 @@ -0,0 +1,133 @@
 +                          taucs_full/CGAL-README.TXT
 +                  -----------------------------------------
@@ -135,9 +135,51 @@ diff -aurN taucs-orig/CGAL-README.TXT taucs/CGAL-README.TXT
 +Laurent Saboret
 +Laurent.Saboret@sophia.inria.fr
 +May 2007
-diff -aurN taucs-orig/config/cygwin.mk taucs/config/cygwin.mk
---- taucs-orig/config/cygwin.mk	1970-01-01 01:00:00.000000000 +0100
-+++ taucs/config/cygwin.mk	2012-06-10 21:03:55.640878000 +0200
+diff -aruN taucs-old/config/FreeBSD.mk taucs-new/config/FreeBSD.mk
+--- taucs-old/config/FreeBSD.mk	2003-08-28 17:13:38.000000000 +0200
++++ taucs-new/config/FreeBSD.mk	2019-05-04 18:39:27.000000000 +0200
+@@ -3,20 +3,20 @@
+ #########################################################
+ OBJEXT=.o
+ LIBEXT=.a
+-EXEEXT= 
++EXEEXT=
+ F2CEXT=.f
+ PATHSEP=/
+ DEFFLG=-D
+ 
+ FC        ?= f77
+ FFLAGS    += -Os -fno-second-underscore
+-FOUTFLG   =-o 
++FOUTFLG   = -o ./
+ 
+ #CC        = cc
+ CFLAGS    += -Os -D_POSIX_C_SOURCE=199506L -fPIC
+-COUTFLG   = -o
++COUTFLG   = -o ./
+ 
+-LD        = $(CC) 
++LD        = $(CC)
+ LDFLAGS   = $(CFLAGS) -static
+ LOUTFLG   = $(COUTFLG)
+ 
+@@ -29,10 +29,10 @@
+ LIBBLAS   = -L/usr/local/lib -lf77blas -lcblas -latlas -lg2c
+ LIBLAPACK = -L/usr/local/lib -llapack
+ 
+-LIBMETIS  = -L/usr/local/lib -lmetis 
++LIBMETIS  = -L/usr/local/lib -lmetis
+ 
+-LIBF77 = -lg2c  
++LIBF77 = -lg2c
+ #compat is required for ftime()
+-LIBC   = -lm -lcompat 
++LIBC   = -lm -lcompat
+ 
+ #########################################################
+diff -aruN taucs-old/config/cygwin.mk taucs-new/config/cygwin.mk
+--- taucs-old/config/cygwin.mk	1970-01-01 01:00:00.000000000 +0100
++++ taucs-new/config/cygwin.mk	2019-05-04 18:39:27.000000000 +0200
 @@ -0,0 +1,50 @@
 +#########################################################
 +# Cygwin/gcc                                            #
@@ -189,9 +231,42 @@ diff -aurN taucs-orig/config/cygwin.mk taucs/config/cygwin.mk
 +
 +
 +
-diff -aurN taucs-orig/config/darwin_intel.mk taucs/config/darwin_intel.mk
---- taucs-orig/config/darwin_intel.mk	1970-01-01 01:00:00.000000000 +0100
-+++ taucs/config/darwin_intel.mk	2012-06-10 21:03:55.640878000 +0200
+diff -aruN taucs-old/config/darwin.mk taucs-new/config/darwin.mk
+--- taucs-old/config/darwin.mk	2003-08-24 12:10:51.000000000 +0200
++++ taucs-new/config/darwin.mk	2019-05-04 18:39:27.000000000 +0200
+@@ -1,9 +1,9 @@
+ #########################################################
+-# Linux                                                 #
++# Darwin (MacOSX) for PowerPC processors                #
+ #########################################################
+ OBJEXT=.o
+ LIBEXT=.a
+-EXEEXT= 
++EXEEXT=
+ F2CEXT=.c
+ PATHSEP=/
+ DEFFLG=-D
+@@ -16,7 +16,7 @@
+ FFLAGS    = $(CFLAGS)
+ FOUTFLG   = $(COUTFLG)
+ 
+-LD        = $(CC) 
++LD        = $(CC)
+ LDFLAGS   = $(CFLAGS)
+ LOUTFLG   = $(COUTFLG)
+ 
+@@ -27,7 +27,7 @@
+ RM        = rm -rf
+ 
+ LIBBLAS   = -framework vecLib
+-LIBLAPACK = 
++LIBLAPACK =
+ LIBMETIS  = -Lexternal/lib/darwin -lmetis
+ 
+ LIBF77 = -Lexternal/lib/darwin -lf2c
+diff -aruN taucs-old/config/darwin_intel.mk taucs-new/config/darwin_intel.mk
+--- taucs-old/config/darwin_intel.mk	1970-01-01 01:00:00.000000000 +0100
++++ taucs-new/config/darwin_intel.mk	2019-05-04 18:39:27.000000000 +0200
 @@ -0,0 +1,44 @@
 +#########################################################
 +# Darwin (MacOSX) for Intel processors                  #
@@ -237,110 +312,9 @@ diff -aurN taucs-orig/config/darwin_intel.mk taucs/config/darwin_intel.mk
 +
 +
 +
-diff -aurN taucs-orig/config/darwin.mk taucs/config/darwin.mk
---- taucs-orig/config/darwin.mk	2003-08-24 12:10:51.000000000 +0200
-+++ taucs/config/darwin.mk	2012-06-10 21:03:55.644878000 +0200
-@@ -1,9 +1,9 @@
- #########################################################
--# Linux                                                 #
-+# Darwin (MacOSX) for PowerPC processors                #
- #########################################################
- OBJEXT=.o
- LIBEXT=.a
--EXEEXT= 
-+EXEEXT=
- F2CEXT=.c
- PATHSEP=/
- DEFFLG=-D
-@@ -16,7 +16,7 @@
- FFLAGS    = $(CFLAGS)
- FOUTFLG   = $(COUTFLG)
- 
--LD        = $(CC) 
-+LD        = $(CC)
- LDFLAGS   = $(CFLAGS)
- LOUTFLG   = $(COUTFLG)
- 
-@@ -27,7 +27,7 @@
- RM        = rm -rf
- 
- LIBBLAS   = -framework vecLib
--LIBLAPACK = 
-+LIBLAPACK =
- LIBMETIS  = -Lexternal/lib/darwin -lmetis
- 
- LIBF77 = -Lexternal/lib/darwin -lf2c
-diff -aurN taucs-orig/config/FreeBSD.mk taucs/config/FreeBSD.mk
---- taucs-orig/config/FreeBSD.mk	2003-08-28 17:13:38.000000000 +0200
-+++ taucs/config/FreeBSD.mk	2012-06-10 21:03:55.644878000 +0200
-@@ -3,20 +3,20 @@
- #########################################################
- OBJEXT=.o
- LIBEXT=.a
--EXEEXT= 
-+EXEEXT=
- F2CEXT=.f
- PATHSEP=/
- DEFFLG=-D
- 
- FC        ?= f77
- FFLAGS    += -Os -fno-second-underscore
--FOUTFLG   =-o 
-+FOUTFLG   = -o ./
- 
- #CC        = cc
- CFLAGS    += -Os -D_POSIX_C_SOURCE=199506L -fPIC
--COUTFLG   = -o
-+COUTFLG   = -o ./
- 
--LD        = $(CC) 
-+LD        = $(CC)
- LDFLAGS   = $(CFLAGS) -static
- LOUTFLG   = $(COUTFLG)
- 
-@@ -29,10 +29,10 @@
- LIBBLAS   = -L/usr/local/lib -lf77blas -lcblas -latlas -lg2c
- LIBLAPACK = -L/usr/local/lib -llapack
- 
--LIBMETIS  = -L/usr/local/lib -lmetis 
-+LIBMETIS  = -L/usr/local/lib -lmetis
- 
--LIBF77 = -lg2c  
-+LIBF77 = -lg2c
- #compat is required for ftime()
--LIBC   = -lm -lcompat 
-+LIBC   = -lm -lcompat
- 
- #########################################################
-diff -aurN taucs-orig/config/irix_cilk.mk taucs/config/irix_cilk.mk
---- taucs-orig/config/irix_cilk.mk	2003-09-04 11:47:58.000000000 +0200
-+++ taucs/config/irix_cilk.mk	2012-06-10 21:03:55.644878000 +0200
-@@ -10,19 +10,19 @@
- 
- CC        = gcc
- COUTFLG   = -o ./
--CFLAGS    = -O3 -Wall -Werror -std=c89
-+CFLAGS    = -O3 -Wall -std=c89
- 
- CILKC      = ../cilk-devel/current/support/cilkclocal
- CILKOUTFLG = -o ./
- CILKFLAGS  = -O3 -x cilk
- 
- LD        = $(CILKC)
--LDFLAGS   = 
-+LDFLAGS   =
- LOUTFLG   = -o ./
- 
- LIBBLAS   = -lcomplib.sgimath
- LIBMETIS  = -Lexternal/lib/irix -lmetis32
- 
- LIBF77    = -L /usr/local/gcc3/lib/gcc-lib/mips-sgi-irix6.5/3.0.4/mabi=64 -lg2c -lgcc
--LIBF77    = 
-+LIBF77    =
- LIBC      = -lc -lm
-diff -aurN taucs-orig/config/irix.mk taucs/config/irix.mk
---- taucs-orig/config/irix.mk	2003-09-04 11:22:14.000000000 +0200
-+++ taucs/config/irix.mk	2012-06-10 21:03:55.644878000 +0200
+diff -aruN taucs-old/config/irix.mk taucs-new/config/irix.mk
+--- taucs-old/config/irix.mk	2003-09-04 11:22:14.000000000 +0200
++++ taucs-new/config/irix.mk	2019-05-04 18:39:27.000000000 +0200
 @@ -3,20 +3,20 @@
  #########################################################
  OBJEXT=.o
@@ -379,9 +353,94 @@ diff -aurN taucs-orig/config/irix.mk taucs/config/irix.mk
  LIBC      = -lc -lm
  
  #########################################################
-diff -aurN taucs-orig/config/linux_intel.mk taucs/config/linux_intel.mk
---- taucs-orig/config/linux_intel.mk	2003-08-31 13:46:20.000000000 +0200
-+++ taucs/config/linux_intel.mk	2012-06-10 21:03:55.644878000 +0200
+diff -aruN taucs-old/config/irix_cilk.mk taucs-new/config/irix_cilk.mk
+--- taucs-old/config/irix_cilk.mk	2003-09-04 11:47:58.000000000 +0200
++++ taucs-new/config/irix_cilk.mk	2019-05-04 18:39:27.000000000 +0200
+@@ -10,19 +10,19 @@
+ 
+ CC        = gcc
+ COUTFLG   = -o ./
+-CFLAGS    = -O3 -Wall -Werror -std=c89
++CFLAGS    = -O3 -Wall -std=c89
+ 
+ CILKC      = ../cilk-devel/current/support/cilkclocal
+ CILKOUTFLG = -o ./
+ CILKFLAGS  = -O3 -x cilk
+ 
+ LD        = $(CILKC)
+-LDFLAGS   = 
++LDFLAGS   =
+ LOUTFLG   = -o ./
+ 
+ LIBBLAS   = -lcomplib.sgimath
+ LIBMETIS  = -Lexternal/lib/irix -lmetis32
+ 
+ LIBF77    = -L /usr/local/gcc3/lib/gcc-lib/mips-sgi-irix6.5/3.0.4/mabi=64 -lg2c -lgcc
+-LIBF77    = 
++LIBF77    =
+ LIBC      = -lc -lm
+diff -aruN taucs-old/config/linux.mk taucs-new/config/linux.mk
+--- taucs-old/config/linux.mk	2003-09-01 14:14:59.000000000 +0200
++++ taucs-new/config/linux.mk	2019-05-04 18:39:27.000000000 +0200
+@@ -1,27 +1,27 @@
+ #########################################################
+-# Linux                                                 #
++# Linux gcc 2.9.x or 3.x                                #
+ #########################################################
+ OBJEXT=.o
+ LIBEXT=.a
+-EXEEXT= 
++EXEEXT=
+ F2CEXT=.f
+ PATHSEP=/
+ DEFFLG=-D
+-
+-FC        = g77
+-FFLAGS    = -O3 -g -fno-second-underscore -Wall 
+-FOUTFLG   =-o 
+-
+-COUTFLG   = -o
+-CFLAGS    = -O3 -g -D_POSIX_C_SOURCE=199506L -Wall -pedantic -ansi -fPIC -fexceptions -D_GNU_SOURCE 
+-CFLAGS    = -g -O3 -Wall -Werror -pedantic -ansi 
+-# for some reason, -std=c99 -pedantic crashes 
++OPT_FLAGS =
++FC        = gfortran
++FFLAGS    = -O2 -g -fno-second-underscore -Wall $(OPT_FLAGS)
++FOUTFLG   = -o ./
++
++COUTFLG   = -o ./
++#CFLAGS    = -O0 -g -D_POSIX_C_SOURCE=199506L -Wall -pedantic -ansi -fPIC -fexceptions -D_GNU_SOURCE $(OPT_FLAGS)
++#CFLAGS    = -g -O2 -Wall -pedantic -ansi $(OPT_FLAGS)
++# for some reason, -std=c99 -pedantic crashes
+ # with the error message "imaginary constants are a GCC extension"
+ # (seems to be a gcc bug, gcc 3.3.1)
+-CFLAGS    = -O3 -Wall -Werror -std=c89 -pedantic
+-CFLAGS    = -O3 -Wall -Werror -std=c99 
++#CFLAGS    = -O2 -Wall -std=c89 -pedantic $(OPT_FLAGS)
++CFLAGS    = -O2 -Wall $(OPT_FLAGS)
+ 
+-LD        = $(CC) 
++LD        = $(CC)
+ LDFLAGS   = 
+ LOUTFLG   = $(COUTFLG)
+ 
+@@ -39,10 +39,10 @@
+ LIBBLAS   = -L external/lib/linux -lf77blas -lcblas -latlas
+ LIBLAPACK = -L external/lib/linux -llapack
+ 
+-LIBMETIS  = -L external/lib/linux -lmetis 
++LIBMETIS  = -L external/lib/linux -lmetis
+ 
+-LIBF77 = -lg2c  
+-LIBC   = -lm 
++LIBF77 = -lg2c
++LIBC   = -lm -lgfortran -lquadmath ${MINGW_EXTRA}
+ 
+ #########################################################
+ 
+diff -aruN taucs-old/config/linux_intel.mk taucs-new/config/linux_intel.mk
+--- taucs-old/config/linux_intel.mk	2003-08-31 13:46:20.000000000 +0200
++++ taucs-new/config/linux_intel.mk	2019-05-04 18:39:27.000000000 +0200
 @@ -5,17 +5,17 @@
  #########################################################
  OBJEXT=.o
@@ -443,99 +502,9 @@ diff -aurN taucs-orig/config/linux_intel.mk taucs/config/linux_intel.mk
  
  #########################################################
  
-diff -aurN taucs-orig/config/linux.mk taucs/config/linux.mk
---- taucs-orig/config/linux.mk	2003-09-01 14:14:59.000000000 +0200
-+++ taucs/config/linux.mk	2012-06-10 22:06:38.840878001 +0200
-@@ -1,28 +1,28 @@
- #########################################################
--# Linux                                                 #
-+# Linux gcc 2.9.x or 3.x                                #
- #########################################################
- OBJEXT=.o
- LIBEXT=.a
--EXEEXT= 
-+EXEEXT=
- F2CEXT=.f
- PATHSEP=/
- DEFFLG=-D
--
--FC        = g77
--FFLAGS    = -O3 -g -fno-second-underscore -Wall 
--FOUTFLG   =-o 
--
--COUTFLG   = -o
--CFLAGS    = -O3 -g -D_POSIX_C_SOURCE=199506L -Wall -pedantic -ansi -fPIC -fexceptions -D_GNU_SOURCE 
--CFLAGS    = -g -O3 -Wall -Werror -pedantic -ansi 
--# for some reason, -std=c99 -pedantic crashes 
-+OPT_FLAGS =
-+FC        = gfortran
-+FFLAGS    = -O2 -g -fno-second-underscore -Wall $(OPT_FLAGS)
-+FOUTFLG   = -o ./
-+
-+COUTFLG   = -o ./
-+#CFLAGS    = -O0 -g -D_POSIX_C_SOURCE=199506L -Wall -pedantic -ansi -fPIC -fexceptions -D_GNU_SOURCE $(OPT_FLAGS)
-+#CFLAGS    = -g -O2 -Wall -pedantic -ansi $(OPT_FLAGS)
-+# for some reason, -std=c99 -pedantic crashes
- # with the error message "imaginary constants are a GCC extension"
- # (seems to be a gcc bug, gcc 3.3.1)
--CFLAGS    = -O3 -Wall -Werror -std=c89 -pedantic
--CFLAGS    = -O3 -Wall -Werror -std=c99 
-+#CFLAGS    = -O2 -Wall -std=c89 -pedantic $(OPT_FLAGS)
-+CFLAGS    = -O2 -Wall -std=c99 $(OPT_FLAGS)
- 
--LD        = $(CC) 
--LDFLAGS   = 
-+LD        = $(FC)
-+LDFLAGS   =
- LOUTFLG   = $(COUTFLG)
- 
- AR        = ar cr
-@@ -39,10 +39,10 @@
- LIBBLAS   = -L external/lib/linux -lf77blas -lcblas -latlas
- LIBLAPACK = -L external/lib/linux -llapack
- 
--LIBMETIS  = -L external/lib/linux -lmetis 
-+LIBMETIS  = -L external/lib/linux -lmetis
- 
--LIBF77 = -lg2c  
--LIBC   = -lm 
-+LIBF77 = -lg2c
-+LIBC   = -lm
- 
- #########################################################
- 
-diff -aurN taucs-orig/config/solaris_cilk.mk taucs/config/solaris_cilk.mk
---- taucs-orig/config/solaris_cilk.mk	2003-09-04 11:56:17.000000000 +0200
-+++ taucs/config/solaris_cilk.mk	2012-06-10 21:03:55.644878000 +0200
-@@ -10,14 +10,14 @@
- 
- CC        = gcc
- COUTFLG   = -o ./
--CFLAGS    = -O3 -Wall -Werror -std=c89
-+CFLAGS    = -O3 -Wall -std=c89
- 
- CILKC      = /export/home/stoledo/cilk-devel/current/support/cilkclocal
- CILKOUTFLG = -o ./
- CILKFLAGS  = -O3 -x cilk
- 
- LD        = $(CILKC)
--LDFLAGS   = 
-+LDFLAGS   =
- LOUTFLG   = -o ./
- 
- LIBMETIS  = -Lexternal/lib/solaris -lmetis
-@@ -25,7 +25,7 @@
- # the -lpthread is to compensate in some bug in cilkclocal
- # that Bradley reported to me.
- 
--LIBF77    = 
-+LIBF77    =
- LIBC      = -lpthread -lc -lm
- 
- #########################################################
-diff -aurN taucs-orig/config/solaris.mk taucs/config/solaris.mk
---- taucs-orig/config/solaris.mk	2003-09-04 11:55:41.000000000 +0200
-+++ taucs/config/solaris.mk	2012-06-10 21:03:55.644878000 +0200
+diff -aruN taucs-old/config/solaris.mk taucs-new/config/solaris.mk
+--- taucs-old/config/solaris.mk	2003-09-04 11:55:41.000000000 +0200
++++ taucs-new/config/solaris.mk	2019-05-04 18:39:27.000000000 +0200
 @@ -3,7 +3,7 @@
  #########################################################
  OBJEXT=.o
@@ -600,68 +569,38 @@ diff -aurN taucs-orig/config/solaris.mk taucs/config/solaris.mk
  
  #########################################################
  
-diff -aurN taucs-orig/config/win32_MDd.mk taucs/config/win32_MDd.mk
---- taucs-orig/config/win32_MDd.mk	1970-01-01 01:00:00.000000000 +0100
-+++ taucs/config/win32_MDd.mk	2012-06-10 21:03:55.644878000 +0200
-@@ -0,0 +1,26 @@
-+#########################################################
-+# WIN32 with debug multithreaded DLL runtime            #
-+#########################################################
-+
-+#CFLAGS    = /nologo /Od /W3 /D "WIN32" /MDd /ZI /Fd"obj\\win32_MDd\\libtaucs.pdb"
-+CFLAGS    = /nologo /O2 /W3 /D "WIN32" /MDd
-+
-+LDFLAGS   = /nologo /MDd /F64000000
-+
-+#LIBBLAS   = external\\lib\\win32\\blas_win32.lib
-+#LIBLAPACK = external\\lib\\win32\\lapack_win32.lib
-+
-+LIBBLAS   = external\\lib\\win32\\libf77blas.lib external\\lib\\win32\\libcblas.lib external\\lib\\win32\\libatlas.lib
-+LIBLAPACK = external\\lib\\win32\\liblapack.lib
-+
-+LIBMETIS  = external\\lib\\win32_MDd\\libmetis.lib
-+LIBF77    = external\\lib\\win32_MDd\\vcf2c.lib
-+
-+
-+
-+
-+
-+
-+
-+
-+
-diff -aurN taucs-orig/config/win32_MD.mk taucs/config/win32_MD.mk
---- taucs-orig/config/win32_MD.mk	1970-01-01 01:00:00.000000000 +0100
-+++ taucs/config/win32_MD.mk	2012-06-10 21:03:55.648878000 +0200
-@@ -0,0 +1,25 @@
-+#########################################################
-+# WIN32 with multithreaded DLL runtime                  #
-+#########################################################
-+
-+CFLAGS    = /nologo /O2 /W3 /D "WIN32" /MD
-+
-+LDFLAGS   = /nologo /MD /F64000000
-+
-+#LIBBLAS   = external\\lib\\win32\\blas_win32.lib
-+#LIBLAPACK = external\\lib\\win32\\lapack_win32.lib
-+
-+LIBBLAS   = external\\lib\\win32\\libf77blas.lib external\\lib\\win32\\libcblas.lib external\\lib\\win32\\libatlas.lib
-+LIBLAPACK = external\\lib\\win32\\liblapack.lib
-+
-+LIBMETIS  = external\\lib\\win32_MD\\libmetis.lib
-+LIBF77    = external\\lib\\win32_MD\\vcf2c.lib
-+
-+
-+
-+
-+
-+
-+
-+
-+
-diff -aurN taucs-orig/config/win32.mk taucs/config/win32.mk
---- taucs-orig/config/win32.mk	2003-08-24 12:10:51.000000000 +0200
-+++ taucs/config/win32.mk	2012-06-10 21:03:55.648878000 +0200
+diff -aruN taucs-old/config/solaris_cilk.mk taucs-new/config/solaris_cilk.mk
+--- taucs-old/config/solaris_cilk.mk	2003-09-04 11:56:17.000000000 +0200
++++ taucs-new/config/solaris_cilk.mk	2019-05-04 18:39:27.000000000 +0200
+@@ -10,14 +10,14 @@
+ 
+ CC        = gcc
+ COUTFLG   = -o ./
+-CFLAGS    = -O3 -Wall -Werror -std=c89
++CFLAGS    = -O3 -Wall -std=c89
+ 
+ CILKC      = /export/home/stoledo/cilk-devel/current/support/cilkclocal
+ CILKOUTFLG = -o ./
+ CILKFLAGS  = -O3 -x cilk
+ 
+ LD        = $(CILKC)
+-LDFLAGS   = 
++LDFLAGS   =
+ LOUTFLG   = -o ./
+ 
+ LIBMETIS  = -Lexternal/lib/solaris -lmetis
+@@ -25,7 +25,7 @@
+ # the -lpthread is to compensate in some bug in cilkclocal
+ # that Bradley reported to me.
+ 
+-LIBF77    = 
++LIBF77    =
+ LIBC      = -lpthread -lc -lm
+ 
+ #########################################################
+diff -aruN taucs-old/config/win32.mk taucs-new/config/win32.mk
+--- taucs-old/config/win32.mk	2003-08-24 12:10:51.000000000 +0200
++++ taucs-new/config/win32.mk	2019-05-04 18:39:27.000000000 +0200
 @@ -1,11 +1,11 @@
  #########################################################
 -# WIN32                                                 #
@@ -702,20 +641,23 @@ diff -aurN taucs-orig/config/win32.mk taucs/config/win32.mk
  LIBC      =
  
  
-diff -aurN taucs-orig/config/win32_mkl_MD.mk taucs/config/win32_mkl_MD.mk
---- taucs-orig/config/win32_mkl_MD.mk	1970-01-01 01:00:00.000000000 +0100
-+++ taucs/config/win32_mkl_MD.mk	2012-06-10 21:03:55.648878000 +0200
-@@ -0,0 +1,22 @@
+diff -aruN taucs-old/config/win32_MD.mk taucs-new/config/win32_MD.mk
+--- taucs-old/config/win32_MD.mk	1970-01-01 01:00:00.000000000 +0100
++++ taucs-new/config/win32_MD.mk	2019-05-04 18:39:27.000000000 +0200
+@@ -0,0 +1,25 @@
 +#########################################################
-+# WIN32 MKL variant with multithreaded DLL runtime      #
++# WIN32 with multithreaded DLL runtime                  #
 +#########################################################
 +
 +CFLAGS    = /nologo /O2 /W3 /D "WIN32" /MD
 +
 +LDFLAGS   = /nologo /MD /F64000000
 +
-+LIBBLAS   = mkl_c.lib libguide40.lib
-+LIBLAPACK = 
++#LIBBLAS   = external\\lib\\win32\\blas_win32.lib
++#LIBLAPACK = external\\lib\\win32\\lapack_win32.lib
++
++LIBBLAS   = external\\lib\\win32\\libf77blas.lib external\\lib\\win32\\libcblas.lib external\\lib\\win32\\libatlas.lib
++LIBLAPACK = external\\lib\\win32\\liblapack.lib
 +
 +LIBMETIS  = external\\lib\\win32_MD\\libmetis.lib
 +LIBF77    = external\\lib\\win32_MD\\vcf2c.lib
@@ -728,9 +670,68 @@ diff -aurN taucs-orig/config/win32_mkl_MD.mk taucs/config/win32_mkl_MD.mk
 +
 +
 +
-diff -aurN taucs-orig/config/win32_MLd.mk taucs/config/win32_MLd.mk
---- taucs-orig/config/win32_MLd.mk	1970-01-01 01:00:00.000000000 +0100
-+++ taucs/config/win32_MLd.mk	2012-06-10 21:03:55.648878000 +0200
+diff -aruN taucs-old/config/win32_MDd.mk taucs-new/config/win32_MDd.mk
+--- taucs-old/config/win32_MDd.mk	1970-01-01 01:00:00.000000000 +0100
++++ taucs-new/config/win32_MDd.mk	2019-05-04 18:39:27.000000000 +0200
+@@ -0,0 +1,26 @@
++#########################################################
++# WIN32 with debug multithreaded DLL runtime            #
++#########################################################
++
++#CFLAGS    = /nologo /Od /W3 /D "WIN32" /MDd /ZI /Fd"obj\\win32_MDd\\libtaucs.pdb"
++CFLAGS    = /nologo /O2 /W3 /D "WIN32" /MDd
++
++LDFLAGS   = /nologo /MDd /F64000000
++
++#LIBBLAS   = external\\lib\\win32\\blas_win32.lib
++#LIBLAPACK = external\\lib\\win32\\lapack_win32.lib
++
++LIBBLAS   = external\\lib\\win32\\libf77blas.lib external\\lib\\win32\\libcblas.lib external\\lib\\win32\\libatlas.lib
++LIBLAPACK = external\\lib\\win32\\liblapack.lib
++
++LIBMETIS  = external\\lib\\win32_MDd\\libmetis.lib
++LIBF77    = external\\lib\\win32_MDd\\vcf2c.lib
++
++
++
++
++
++
++
++
++
+diff -aruN taucs-old/config/win32_ML.mk taucs-new/config/win32_ML.mk
+--- taucs-old/config/win32_ML.mk	1970-01-01 01:00:00.000000000 +0100
++++ taucs-new/config/win32_ML.mk	2019-05-04 18:39:27.000000000 +0200
+@@ -0,0 +1,25 @@
++#########################################################
++# WIN32 with single thread runtime                      #
++#########################################################
++
++CFLAGS    = /nologo /O2 /W3 /D "WIN32" /ML
++
++LDFLAGS   = /nologo /ML /F64000000
++
++#LIBBLAS   = external\\lib\\win32\\blas_win32.lib
++#LIBLAPACK = external\\lib\\win32\\lapack_win32.lib
++
++LIBBLAS   = external\\lib\\win32\\libf77blas.lib external\\lib\\win32\\libcblas.lib external\\lib\\win32\\libatlas.lib
++LIBLAPACK = external\\lib\\win32\\liblapack.lib
++
++LIBMETIS  = external\\lib\\win32_ML\\libmetis.lib
++LIBF77    = external\\lib\\win32_ML\\vcf2c.lib
++
++
++
++
++
++
++
++
++
+diff -aruN taucs-old/config/win32_MLd.mk taucs-new/config/win32_MLd.mk
+--- taucs-old/config/win32_MLd.mk	1970-01-01 01:00:00.000000000 +0100
++++ taucs-new/config/win32_MLd.mk	2019-05-04 18:39:27.000000000 +0200
 @@ -0,0 +1,26 @@
 +#########################################################
 +# WIN32 with debug single thread runtime                #
@@ -758,17 +759,17 @@ diff -aurN taucs-orig/config/win32_MLd.mk taucs/config/win32_MLd.mk
 +
 +
 +
-diff -aurN taucs-orig/config/win32_ML.mk taucs/config/win32_ML.mk
---- taucs-orig/config/win32_ML.mk	1970-01-01 01:00:00.000000000 +0100
-+++ taucs/config/win32_ML.mk	2012-06-10 21:03:55.648878000 +0200
+diff -aruN taucs-old/config/win32_MT.mk taucs-new/config/win32_MT.mk
+--- taucs-old/config/win32_MT.mk	1970-01-01 01:00:00.000000000 +0100
++++ taucs-new/config/win32_MT.mk	2019-05-04 18:39:27.000000000 +0200
 @@ -0,0 +1,25 @@
 +#########################################################
-+# WIN32 with single thread runtime                      #
++# WIN32 with multithreaded static runtime               #
 +#########################################################
 +
-+CFLAGS    = /nologo /O2 /W3 /D "WIN32" /ML
++CFLAGS    = /nologo /O2 /W3 /D "WIN32" /MT
 +
-+LDFLAGS   = /nologo /ML /F64000000
++LDFLAGS   = /nologo /MT /F64000000
 +
 +#LIBBLAS   = external\\lib\\win32\\blas_win32.lib
 +#LIBLAPACK = external\\lib\\win32\\lapack_win32.lib
@@ -776,8 +777,8 @@ diff -aurN taucs-orig/config/win32_ML.mk taucs/config/win32_ML.mk
 +LIBBLAS   = external\\lib\\win32\\libf77blas.lib external\\lib\\win32\\libcblas.lib external\\lib\\win32\\libatlas.lib
 +LIBLAPACK = external\\lib\\win32\\liblapack.lib
 +
-+LIBMETIS  = external\\lib\\win32_ML\\libmetis.lib
-+LIBF77    = external\\lib\\win32_ML\\vcf2c.lib
++LIBMETIS  = external\\lib\\win32_MT\\libmetis.lib
++LIBF77    = external\\lib\\win32_MT\\vcf2c.lib
 +
 +
 +
@@ -787,9 +788,9 @@ diff -aurN taucs-orig/config/win32_ML.mk taucs/config/win32_ML.mk
 +
 +
 +
-diff -aurN taucs-orig/config/win32_MTd.mk taucs/config/win32_MTd.mk
---- taucs-orig/config/win32_MTd.mk	1970-01-01 01:00:00.000000000 +0100
-+++ taucs/config/win32_MTd.mk	2012-06-10 21:03:55.648878000 +0200
+diff -aruN taucs-old/config/win32_MTd.mk taucs-new/config/win32_MTd.mk
+--- taucs-old/config/win32_MTd.mk	1970-01-01 01:00:00.000000000 +0100
++++ taucs-new/config/win32_MTd.mk	2019-05-04 18:39:27.000000000 +0200
 @@ -0,0 +1,26 @@
 +#########################################################
 +# WIN32 with debug multithreaded static runtime         #
@@ -817,26 +818,23 @@ diff -aurN taucs-orig/config/win32_MTd.mk taucs/config/win32_MTd.mk
 +
 +
 +
-diff -aurN taucs-orig/config/win32_MT.mk taucs/config/win32_MT.mk
---- taucs-orig/config/win32_MT.mk	1970-01-01 01:00:00.000000000 +0100
-+++ taucs/config/win32_MT.mk	2012-06-10 21:03:55.648878000 +0200
-@@ -0,0 +1,25 @@
+diff -aruN taucs-old/config/win32_mkl_MD.mk taucs-new/config/win32_mkl_MD.mk
+--- taucs-old/config/win32_mkl_MD.mk	1970-01-01 01:00:00.000000000 +0100
++++ taucs-new/config/win32_mkl_MD.mk	2019-05-04 18:39:27.000000000 +0200
+@@ -0,0 +1,22 @@
 +#########################################################
-+# WIN32 with multithreaded static runtime               #
++# WIN32 MKL variant with multithreaded DLL runtime      #
 +#########################################################
 +
-+CFLAGS    = /nologo /O2 /W3 /D "WIN32" /MT
++CFLAGS    = /nologo /O2 /W3 /D "WIN32" /MD
 +
-+LDFLAGS   = /nologo /MT /F64000000
++LDFLAGS   = /nologo /MD /F64000000
 +
-+#LIBBLAS   = external\\lib\\win32\\blas_win32.lib
-+#LIBLAPACK = external\\lib\\win32\\lapack_win32.lib
++LIBBLAS   = mkl_c.lib libguide40.lib
++LIBLAPACK = 
 +
-+LIBBLAS   = external\\lib\\win32\\libf77blas.lib external\\lib\\win32\\libcblas.lib external\\lib\\win32\\libatlas.lib
-+LIBLAPACK = external\\lib\\win32\\liblapack.lib
-+
-+LIBMETIS  = external\\lib\\win32_MT\\libmetis.lib
-+LIBF77    = external\\lib\\win32_MT\\vcf2c.lib
++LIBMETIS  = external\\lib\\win32_MD\\libmetis.lib
++LIBF77    = external\\lib\\win32_MD\\vcf2c.lib
 +
 +
 +
@@ -846,9 +844,9 @@ diff -aurN taucs-orig/config/win32_MT.mk taucs/config/win32_MT.mk
 +
 +
 +
-diff -aurN taucs-orig/configurator/makefile.unix taucs/configurator/makefile.unix
---- taucs-orig/configurator/makefile.unix	2003-08-05 09:20:44.000000000 +0200
-+++ taucs/configurator/makefile.unix	2012-06-10 22:26:36.260878001 +0200
+diff -aruN taucs-old/configurator/makefile.unix taucs-new/configurator/makefile.unix
+--- taucs-old/configurator/makefile.unix	2003-08-05 09:20:44.000000000 +0200
++++ taucs-new/configurator/makefile.unix	2019-05-04 18:39:27.000000000 +0200
 @@ -1,6 +1,6 @@
  
  configurator/configurator: configurator/taucs_config.c configurator/taucs_structure.h
@@ -857,9 +855,9 @@ diff -aurN taucs-orig/configurator/makefile.unix taucs/configurator/makefile.uni
  
  clean:
  	- /bin/rm configurator/configurator
-diff -aurN taucs-orig/configurator/taucs_config.c taucs/configurator/taucs_config.c
---- taucs-orig/configurator/taucs_config.c	2003-09-04 11:08:32.000000000 +0200
-+++ taucs/configurator/taucs_config.c	2012-06-10 21:03:55.652878000 +0200
+diff -aruN taucs-old/configurator/taucs_config.c taucs-new/configurator/taucs_config.c
+--- taucs-old/configurator/taucs_config.c	2003-09-04 11:08:32.000000000 +0200
++++ taucs-new/configurator/taucs_config.c	2019-05-04 18:39:27.000000000 +0200
 @@ -13,6 +13,15 @@
  char  pathsep      = '/';
  int   win32        = 0;
@@ -1173,9 +1171,9 @@ diff -aurN taucs-orig/configurator/taucs_config.c taucs/configurator/taucs_confi
  
      fprintf(stderr,"error: command line argument <%s> is invalid\n",argv[i]);
      exit(1);
-diff -aurN taucs-orig/configure taucs/configure
---- taucs-orig/configure	2003-08-24 12:11:33.000000000 +0200
-+++ taucs/configure	2012-06-10 21:03:55.652878000 +0200
+diff -aruN taucs-old/configure taucs-new/configure
+--- taucs-old/configure	2003-08-24 12:11:33.000000000 +0200
++++ taucs-new/configure	2019-05-04 18:39:27.000000000 +0200
 @@ -1,4 +1,4 @@
 -#!/bin/sh 
 +#!/bin/sh
@@ -1227,4 +1225,78 @@ diff -aurN taucs-orig/configure taucs/configure
 +
  # end of script
  
-
+diff -aruN taucs-old/src/taucs_ccs_ooc_lu.c taucs-new/src/taucs_ccs_ooc_lu.c
+--- taucs-old/src/taucs_ccs_ooc_lu.c	2003-08-28 16:43:17.000000000 +0200
++++ taucs-new/src/taucs_ccs_ooc_lu.c	2019-05-04 21:07:57.000000000 +0200
+@@ -23,7 +23,7 @@
+ 
+ #ifndef TAUCS_CORE_GENERAL
+ 
+-#ifdef OSTYPE_win32
++#if defined(OSTYPE_win32) || defined(__MINGW32__)
+ #include <io.h>
+ #else
+ #include <unistd.h>
+diff -aruN taucs-old/src/taucs_memory.c taucs-new/src/taucs_memory.c
+--- taucs-old/src/taucs_memory.c	2003-09-01 08:16:13.000000000 +0200
++++ taucs-new/src/taucs_memory.c	2019-05-04 19:58:54.000000000 +0200
+@@ -22,7 +22,7 @@
+ /*   stack overflows in recursive functions                         */
+ /********************************************************************/
+ 
+-#ifndef OSTYPE_win32
++#if !defined(OSTYPE_win32) && !defined(__MINGW32__)
+ #include <unistd.h>
+ 
+ /* without _XPG4_2, sys/time.h does not define timeval */
+@@ -94,7 +94,7 @@
+ /*   should not normally be called by the user (call _avail_)       */
+ /********************************************************************/
+ 
+-#ifdef OSTYPE_linux
++#if defined(OSTYPE_linux) && !defined(__MINGW32__)
+ #define TAUCS_SYSTEM_MEMORY_SIZE_DEFINED
+ 
+ double taucs_system_memory_size()
+@@ -217,7 +217,7 @@
+ }
+ #endif
+ 
+-#ifdef OSTYPE_win32
++#if defined(OSTYPE_win32) || defined(__MINGW32__)
+ #define TAUCS_SYSTEM_MEMORY_SIZE_DEFINED
+ #include <windows.h>
+ 
+diff -aruN taucs-old/src/taucs_ooc_io.c taucs-new/src/taucs_ooc_io.c
+--- taucs-old/src/taucs_ooc_io.c	2003-08-28 16:43:17.000000000 +0200
++++ taucs-new/src/taucs_ooc_io.c	2019-05-04 21:12:18.000000000 +0200
+@@ -18,7 +18,7 @@
+ #include <assert.h>
+ #include <math.h>
+ 
+-#ifdef OSTYPE_win32
++#if defined(OSTYPE_win32) || defined(__MINGW32__)
+ #include <io.h>
+ #else
+ #include <unistd.h>
+diff -aruN taucs-old/src/taucs_timer.c taucs-new/src/taucs_timer.c
+--- taucs-old/src/taucs_timer.c	2003-09-01 12:28:54.000000000 +0200
++++ taucs-new/src/taucs_timer.c	2019-05-04 20:06:58.000000000 +0200
+@@ -10,7 +10,7 @@
+ double taucs_ctime() { return 0.0; }
+ #else
+ 
+-#ifdef OSTYPE_win32
++#if defined(OSTYPE_win32) || defined(__MINGW32__)
+ #define TAUCS_TIMER
+ 
+ #include <windows.h>
+@@ -227,7 +227,7 @@
+ /*                                                       */
+ /*********************************************************/
+ 
+-#ifndef OSTYPE_win32
++#if !defined(OSTYPE_win32) && !defined(__MINGW32__)
+ #define TAUCS_TIMER
+ 
+ #include <stdio.h>                                                 
