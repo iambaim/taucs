@@ -17,5 +17,8 @@ matrix:
             - metis
     - os: windows
 
+before_script:
+ - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./buildf2c_osx.sh; fi
+
 script:
   - ./build.sh
