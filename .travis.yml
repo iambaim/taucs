@@ -8,16 +8,11 @@ matrix:
           packages:
             - liblapack-dev
             - libblas-dev
-            - libmetis-dev
             - gfortran
     - os: osx
-      addons:
-        homebrew:
-          packages:
-            - metis
 
 before_script:
  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./buildf2c_osx.sh; fi
 
 script:
- - ./download.sh && ./build.sh && ./gather.sh
+ - ./download.sh && ./build.sh

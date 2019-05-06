@@ -17,7 +17,7 @@ IF %COMPILER%==msys2 (
     bash -lc "pacman -S --needed --noconfirm mingw-w64-x86_64-toolchain autoconf automake libtool make patch mingw-w64-x86_64-libtool"
 
     REM dependencies
-    bash -lc "pacman -S --noconfirm --needed mingw-w64-x86_64-metis mingw-w64-x86_64-lapack mingw-w64-x86_64-openblas mingw-w64-x86_64-f2c"
+    bash -lc "pacman -S --noconfirm --needed mingw-w64-x86_64-lapack mingw-w64-x86_64-openblas mingw-w64-x86_64-f2c"
 
     REM start build
     bash -lc "cd $TAUCS_BUILD_DIR && ./build_win.sh"
