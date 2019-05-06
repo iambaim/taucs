@@ -4,6 +4,7 @@
 curl -o metis.tgz http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-4.0.3.tar.gz
 tar -zxvf metis.tgz
 cd metis-4.0.3
+patch -p1 < ../metis-4.0.3.patch 
 make
 export LMETIS_LOC=-L`pwd`
 cd ..
