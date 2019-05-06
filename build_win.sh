@@ -1,7 +1,5 @@
 #!/bin/sh
 
-cd ${APPVEYOR_BUILD_FOLDER}
-
 # Start build
 
 make -f configurator/makefile.unix

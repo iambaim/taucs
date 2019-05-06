@@ -1,7 +1,5 @@
 @echo off
 
-cd %APPVEYOR_BUILD_FOLDER%
-
 echo Compiler: %COMPILER%
 echo Architecture: %MSYS2_ARCH%
 echo Platform: %PLATFORM%
@@ -21,14 +19,7 @@ IF %COMPILER%==msys2 (
     REM dependencies
     bash -lc "pacman -S --noconfirm --needed mingw-w64-x86_64-metis mingw-w64-x86_64-lapack mingw-w64-x86_64-openblas mingw-w64-x86_64-f2c"
 
-    REM cc is missing?
-    REM bash -lc "which cc"
-    REM bash -lc "cc -v"
-    REM bash -lc "gcc -v"
-    REM bash -lc "cp -pv /mingw64/bin/gcc /mingw64/bin/cc"
-
     REM start build
-    bash -lc "pwd"
-    bash -lc "cd $APPVEYOR_BUILD_FOLDER && ./build_win.sh"
+    bash -lc "cd $TAUCS_BUILD_DIR && ./build_win.sh"
 )
 
